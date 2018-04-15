@@ -70,7 +70,7 @@ for hop in range(maxHop):
         for layerCount in range(len(nodeList)):
             output = []
             nodeInLayer = len(nodeList[layerCount])
-            WeightToNode =(int)(len(WNodeList[layerCount]) / nodeInLayer)
+            WeightToNode =int(len(WNodeList[layerCount]) / nodeInLayer)
             wInterrest = 0
             for nodeCount in range(nodeInLayer):
                 lastInterest = wInterrest + WeightToNode +2
