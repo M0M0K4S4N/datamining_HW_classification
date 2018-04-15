@@ -25,10 +25,15 @@ class Node:
 
         return 1/(1+math.exp(- self.V()))
     
-    def hiddenRoll(self,roll,wRoll):
-        print()
-        #-----------------
-        
+    def hiddenRoll(self,listFront,i,isOutput):
+        out = 0
+        for node in listFront:
+            if(isOutput == True):
+                out += node.W_in[i] * node.roll()
+            else:
+                out += node.W_in[i] * node.hiddenRoll()
+            
+            
 
     def changeInput(self,object):
         self.input_attr = object
@@ -48,17 +53,18 @@ class OutputNode(Node):
     def roll(self):
         return (self.error() * self.Y() *(1 - self.Y()))
 
-hidden = []
-output = []
+node = []
 def initNode():
-    hidden.append(Node([0,0,0,0]))
-    hidden.append(Node([0,0,0,0]))
-    hidden.append(Node([0,0,0,0]))    
-    output.append(OutputNode([0,0,0],0))
-    output.append(OutputNode([0,0,0],0))
-    output.append(OutputNode([0,0,0],0))
-    output.append(OutputNode([0,0,0],0))
-    
+    listNode = []
+    for i in range(3):
+        listNode.append(Node([0,0,0,0]))
+    node.append(listNode)
+
+    listNode = []
+    for i in range(4):
+        listNode.append(OutputNode([0,0,0],0))
+    node.append(listNode)
+
 H = []
 data = pd.read_csv('iris.csv')
 initNode()
