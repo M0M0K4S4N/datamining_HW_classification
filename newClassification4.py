@@ -65,7 +65,7 @@ for i in range(len(loadData[0])):
 
 
 expectOutput = [1,0]
-maxTrain = 300
+maxTrain = 500
 
 for hop in range(maxTrain):
     print(hop * 100 / maxTrain)
@@ -94,18 +94,18 @@ for hop in range(maxTrain):
                 output.append(Y)
             inputNextNode = output
             saveY.append(output)
-            #print(output)
+
 
         #error calc
         for i in range(len(output)):
             error.append( output[i] - expectOutput[i] )
-        #print(error)
+
         
         saveY =  list(reversed(saveY))
         saveY.append(data[dataCount])
         nodeList = list(reversed(nodeList))
         weightList = list(reversed(weightList))
-        #print(weightList)
+
         listRoll = []
         #roll calc
         for layer in range(len(nodeList)):
@@ -119,12 +119,11 @@ for hop in range(maxTrain):
                     weightToNode = int(len(weightList[layer-1]) / len(nodeList[layer]))
                     weightCurrent = nodeCount
                     for beforeRoll in range(len(listRoll[layer-1])):
-                        #print(str(listRoll[layer-1][beforeRoll]) + " * " +str(weightList[layer-1][weightCurrent]))
-                        #print(listRoll[layer-1][beforeRoll]*weightList[layer][weightCurrent])
+
                         val = (listRoll[layer-1][beforeRoll]*weightList[layer-1][weightCurrent])
                         sum += val
                         weightCurrent += weightToNode
-                    #print(sum)
+
                     roll.append(calculateFprime(saveY[layer][nodeCount]) * sum)
             listRoll.append(roll)
         
@@ -160,20 +159,20 @@ for i in range(len(loadData[0])):
 
 correct = 0
 all = len(loadData[0])
-#print(expect)
+
 #------test 
 for dataCount in range(len(data)):
-    #print(expect[dataCount])
+
     if(expect[dataCount] == 0):
         expectOutput = [1,0]
     elif(expect[dataCount] == 1):
         expectOutput = [0,1]
  
         
-    #print(expectOutput)
+
     saveY = []
     error = []
-    #saveRoll = []
+
     inputNextNode = data[dataCount]
     # Y calc
     for layer in range(len(nodeList)):
