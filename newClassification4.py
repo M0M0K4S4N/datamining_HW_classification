@@ -116,7 +116,7 @@ for hop in range(maxTrain):
                 else:
                     sum = 0
                     
-                    weightToNode = int(len(weightList[layer-1]) / len(nodeList[layer]))
+                    weightToNode = int(len(weightList[layer-1]) / len(nodeList[layer-1]))
                     weightCurrent = nodeCount
                     for beforeRoll in range(len(listRoll[layer-1])):
 
@@ -129,7 +129,7 @@ for hop in range(maxTrain):
         
         for layer in range(len(weightList)):
             node = 0
-            weightToNode = int(len(weightList[layer]) / len(nodeList[layer]))
+            weightToNode = int(len(weightList[layer]) / len(nodeList[layer-1]))
             weightEnd = weightToNode 
             for weightCount in range(len(weightList[layer])):
                 weightList[layer][weightCount] += (-learning_rate)*(listRoll[layer][node])*(saveY[layer+1][weightCount%weightToNode])
